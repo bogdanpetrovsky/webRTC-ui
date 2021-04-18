@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SocketIoService } from './core/socket-io/socket-io.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'myWebRTC';
+
+  constructor(private socketIOService: SocketIoService) {
+    this.socketIOService.initialize();
+  }
 }
