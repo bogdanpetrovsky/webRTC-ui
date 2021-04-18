@@ -1,0 +1,11 @@
+<header class="header">
+  <div class="logo-container">
+    <h1 class="logo-text">
+      <i class="fa fa-eye logo-img" aria-hidden="true" *ngIf="!anonymous" (click)="changeAnonymousState()"></i>
+      <i class="fa fa-eye-slash logo-img" aria-hidden="true" *ngIf="anonymous" (click)="changeAnonymousState()"></i>WebRTC
+    </h1>
+  </div>
+  <div class="user-container">
+    <i class="fa fa-user-secret" aria-hidden="true"></i>
+  </div>
+</header>

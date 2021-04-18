@@ -1,0 +1,33 @@
+@import "src/styles/variables";
+
+.footer {
+  position: absolute;
+  width: 375px;
+  bottom: 0;
+  right: 0;
+
+  .social-links {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: $active-bg-color;
+    padding: 10px;
+    border-top-left-radius: $default-thumbnail-border-radius;
+    border-top-right-radius: $default-thumbnail-border-radius;
+
+    .contact-link {
+      text-decoration: none;
+
+      .contact-icon {
+        display: flex;
+        justify-content: center;
+        border-radius: 50%;
+        min-width: 32px;
+        min-height: 32px;
+        background: #5c5c5c;
+        color: #FFF;
+        padding: $ld-offset-sm;
+      }
+    }
+  }
+}

@@ -1,0 +1,36 @@
+.header {
+  background-color: #ffffff;
+  padding: 10px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .logo-container {
+    display: flex;
+    align-items: center;
+
+    .logo-img {
+      width: 25px;
+      height: 25px;
+      margin-right: 5px;
+      cursor: pointer;
+    }
+
+    .logo-text {
+      font-size: 25px;
+      font-weight: 700;
+      font-style: italic;
+      margin: 0;
+
+      .logo-highlight {
+        color: #65a9e5;
+      }
+    }
+  }
+
+  .user-container {
+    font-size: 25px;
+    cursor: pointer;
+  }
+}
