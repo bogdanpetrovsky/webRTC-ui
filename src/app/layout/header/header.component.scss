@@ -9,6 +9,8 @@
   .logo-container {
     display: flex;
     align-items: center;
+    cursor: pointer;
+    outline: none;
 
     .logo-img {
       width: 25px;
@@ -29,8 +31,15 @@
     }
   }
 
-  .user-container {
+  .menu-container {
     font-size: 25px;
     cursor: pointer;
+    height: 25px;
+
+    .menu-icon {
+      cursor: pointer;
+      font-size: 30px;
+      line-height: 25px;
+    }
   }
 }

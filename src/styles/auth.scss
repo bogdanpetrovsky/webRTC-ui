@@ -1,0 +1,31 @@
+@import "variables";
+
+.auth-container {
+  position: fixed;
+  z-index: 5;
+  top: $header-height;
+  left: 0;
+  height: calc(100% - #{$header-height});
+  width: 100%;
+  overflow: auto;
+
+  .auth-content {
+    display: table;
+    width: 100%;
+    height: 100%;
+
+    .auth-content-inner {
+      display: table-cell;
+      vertical-align: middle;
+      padding-top: 35px;
+      max-width: 300px;
+      margin: 0 auto;
+    }
+
+    .auth-form-container {
+      padding: $default-offset;
+      margin: $default-offset auto $default-offset auto;
+      border-radius: $default-thumbnail-border-radius;
+    }
+  }
+}

@@ -1,11 +1,14 @@
 @import "src/styles/variables";
 
+.container {
+  height: 100%;
+}
+
 .content-container {
-  width: 100%;
-  height: calc(100vh - #{$header-height});
   display: flex;
   justify-content: space-between;
-  overflow: hidden;
+  height: 100%;
+  width: 100%;
 }
 
 .active-users-panel {

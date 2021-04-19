@@ -1,0 +1,13 @@
+@import "src/styles/variables";
+
+.sign-in-container {
+  width: 400px;
+  background: #e8f0fe;
+  border: 1px $primary-blue;
+
+  .sign-in-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}

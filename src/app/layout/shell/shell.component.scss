@@ -1,0 +1,7 @@
+@import "src/styles/variables";
+
+.shell-container {
+  width: 100%;
+  height: calc(100% - #{$header-height});
+  overflow: hidden;
+}
