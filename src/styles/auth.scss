@@ -29,3 +29,29 @@
     }
   }
 }
+
+.sign-in-container, .sign-up-container {
+  width: 400px;
+  background: #e8f0fe29;
+  border: 2px solid $primary-blue;
+
+  .sign-in-form, .sign-up-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .link-container {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.mat-progress-spinner circle, .mat-spinner circle {
+  stroke: $primary-blue;
+}
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+}

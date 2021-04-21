@@ -1,0 +1,37 @@
+$dark-outer-bg-color: #121212;
+$dark-inner-bg-color: #1e1e1e;
+$dark-text-color: #fff;
+$dark-secondary-text-color: #7a7a7a;
+$dark-primary-color: #bb86fc;
+
+body {
+  &.dark {
+    background: $dark-outer-bg-color;
+    color: $dark-text-color;
+
+    .social-links {
+      background: $dark-inner-bg-color;
+      .contact-link {
+        background: $dark-inner-bg-color;
+        .contact-icon {
+          background: $dark-outer-bg-color;
+          color: $dark-primary-color;
+        }
+      }
+    }
+
+    header {
+      &.header {
+        background: $dark-inner-bg-color;
+        color: $dark-primary-color;
+      }
+    }
+
+    footer {
+      &.footer {
+        color: $dark-text-color;
+      }
+    }
+
+  }
+}

@@ -1,0 +1,52 @@
+@import "variables";
+
+.rtc-input {
+  .password-mat-button {
+    color: $primary-blue;
+  }
+}
+
+.sign-in-button, .sign-up-button {
+  background: $primary-blue;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 15px;
+  color: #FFF;
+  height: 50px;
+}
+
+.sign-up-button {
+  background: $primary-green;
+}
+
+.sign-up-link, .sign-in-link {
+  display: block;
+  margin-top: $ld-offset-lg;
+  text-decoration: none;
+  color: $primary-blue;
+}
+
+.social-links {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: $active-bg-color;
+  padding: 10px;
+  border-top-left-radius: $default-thumbnail-border-radius;
+  border-top-right-radius: $default-thumbnail-border-radius;
+
+  .contact-link {
+    text-decoration: none;
+
+    .contact-icon {
+      display: flex;
+      justify-content: center;
+      border-radius: 50%;
+      min-width: 32px;
+      min-height: 32px;
+      background: #5c5c5c;
+      color: #FFF;
+      padding: $ld-offset-sm;
+    }
+  }
+}
+

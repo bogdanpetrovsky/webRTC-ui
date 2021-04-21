@@ -15,13 +15,13 @@
               Email is <strong>required</strong>
             </mat-error>
           </mat-form-field>
-          <mat-form-field appearance="outline" class="w-form-field wf-input">
+          <mat-form-field appearance="outline" class="rtc-input">
             <mat-label>Password</mat-label>
             <label>
               <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'"
                      formControlName="password" autocomplete="new-password" required>
             </label>
-            <button mat-icon-button
+            <button mat-icon-button class="password-mat-button"
                     matSuffix
                     (click)="hide = !hide"
                     [attr.aria-label]="'Hide password'"
@@ -41,11 +41,12 @@
             Sign In
           </button>
         </form>
-        <mat-progress-spinner *ngIf="inProgress"></mat-progress-spinner>
-        <a routerLink="/sign-up"
-           mat-raised-button
-           class="sign-up-button"
-        >Sign Up</a>
+        <div class="spinner-container">
+          <mat-progress-spinner mode="indeterminate" [diameter]="75" *ngIf="inProgress"></mat-progress-spinner>
+        </div>
+        <div class="link-container" *ngIf="!inProgress">
+          <a routerLink="/sign-up" class="sign-up-link">Sign Up</a>
+        </div>
       </div>
     </div>
   </div>

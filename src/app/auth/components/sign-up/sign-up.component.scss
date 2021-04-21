@@ -1,0 +1,14 @@
+@import "src/styles/variables";
+
+.sign-up-container {
+  .sign-up-form {
+    ::ng-deep {
+      .mat-form-field-suffix {
+        position: static;
+      }
+      .password-mat-button {
+        font-size: 13px;
+      }
+    }
+  }
+}

@@ -1,9 +1,24 @@
 @import "styles/variables";
 @import "styles/navigation-menu";
 @import "styles/auth";
+@import "styles/buttons";
+@import "styles/themes";
 
 * {
   box-sizing: border-box
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-text-fill-color: #000000;
+  -webkit-box-shadow: 0 0 0 1000px #fbfdff inset;
 }
 
 html, body {
@@ -14,7 +29,7 @@ html, body {
 
 body {
   margin: 0;
-  font-family: 'Work Sans', sans-serif;
+  font-family: 'Work Sans', sans-serif !important;
   background-color: #ffffff;
 }
 

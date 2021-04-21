@@ -98,7 +98,7 @@ export class SocketIoService {
         .forEach((track) => this.peerConnection.addTrack(track, stream));
 
     } catch (err) {
-      alert(err);
+      console.log(err);
     }
   }
 
