@@ -3,6 +3,8 @@ $dark-inner-bg-color: #1e1e1e;
 $dark-text-color: #fff;
 $dark-secondary-text-color: #7a7a7a;
 $dark-primary-color: #bb86fc;
+$dark-primary-color-faded: #bb86fca8;
+$dark-error-color: red;
 
 body {
   &.dark {
@@ -33,5 +35,341 @@ body {
       }
     }
 
+    textarea::-webkit-resizer {
+      border-width: 8px;
+      border-style: solid;
+      border-color: transparent $dark-primary-color $dark-primary-color transparent;
+    }
+
+    .spinner-container {
+      background: $dark-inner-bg-color;
+    }
+
+    .mat-progress-spinner circle, .mat-spinner circle {
+      stroke: $dark-primary-color;
+    }
+
+    .mat-slide-toggle.mat-checked {
+      .mat-slide-toggle-bar, .mat-ripple-element {
+        background: $dark-primary-color;
+      }
+    }
+    .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
+      background-color: #fff;
+    }
+
+    .mat-chip {
+      &.mat-standard-chip {
+        color: $dark-primary-color;
+        background: $dark-outer-bg-color;
+        border: $dark-outer-bg-color;
+
+        &.highlighted {
+          color: $dark-outer-bg-color;
+          background: $dark-primary-color;
+        }
+      }
+    }
+
+    .mat-tab-nav-bar {
+      border-bottom-color: rgba(255,255,255, 0.3);
+
+      .mat-tab-link-container {
+        .mat-tab-link {
+          color: #ffffff;
+        }
+      }
+    }
+
+    .mat-tab-group {
+      .mat-tab-header {
+        border-bottom-color: rgba(255,255,255, 0.3);
+      }
+
+      .mat-tab-label {
+        color: #ffffff;
+      }
+    }
+
+    .mat-tab-nav-bar.mat-primary, .mat-tab-group {
+      .mat-ink-bar {
+        background-color: $primary-orange;
+      }
+    }
+
+    .mat-tab-header-pagination-chevron {
+      border-color: $dark-primary-color;
+    }
+
+    .rtc-input {
+      &.mat-form-field-appearance-outline {
+        .mat-form-field-suffix, .mat-form-field-label, .mat-form-field-outline, .mat-form-field-placeholder {
+          color: $dark-primary-color;
+        }
+      }
+      &.mat-form-field-invalid {
+        .mat-form-field-suffix, .mat-form-field-label, .mat-form-field-outline, .mat-form-field-placeholder {
+          color: $dark-error-color;
+          caret-color: $dark-error-color;
+        }
+
+        ::placeholder {
+          color: $dark-error-color;
+        }
+      }
+
+      &.mat-form-field-disabled {
+        .mat-form-field-suffix, .mat-form-field-label, .mat-form-field-outline, .mat-form-field-placeholder {
+          color: $dark-primary-color-faded;
+        }
+      }
+
+      ::placeholder {
+        color: $dark-primary-color;
+      }
+
+      .mat-select-arrow {
+        color: $dark-primary-color;
+      }
+
+      .mat-select-value {
+        color: $dark-text-color;
+      }
+
+      .iti__country-list {
+        background-color: $dark-inner-bg-color;
+      }
+
+      .iti__arrow--up {
+        border-bottom: 4px solid $dark-primary-color;
+        border-top: none;
+      }
+
+      .iti__arrow {
+        border-top: 4px solid $dark-primary-color;
+        border-bottom: none;
+      }
+
+      &.mat-focused {
+        .mat-select-arrow {
+          color: $dark-primary-color;
+        }
+      }
+    }
+
+    .mat-input-element {
+      caret-color: $dark-primary-color;
+
+      &:disabled {
+        color: $dark-text-color;
+        opacity: .5;
+      }
+    }
+
+    .mat-radio-button.mat-primary {
+      .mat-radio-inner-circle {
+        background: $dark-primary-color;
+      }
+      .mat-radio-outer-circle {
+        border-color: $dark-primary-color;
+      }
+
+      &.mat-radio-checked, &:active {
+        .mat-radio-persistent-ripple, .mat-ripple-element {
+          background-color: $dark-primary-color-faded;
+        }
+      }
+    }
+
+    .multiselect {
+      .ng-select {
+        caret-color: $dark-primary-color;
+        .ng-select-container {
+          color: $dark-text-color;
+
+          .ng-value-container .ng-placeholder {
+            color: $dark-primary-color;
+            background: transparent;
+          }
+          &.ng-appearance-outline:hover:after {
+            border-color: $dark-primary-color;
+          }
+          &.ng-appearance-outline:after {
+            border-color: $dark-primary-color;
+            &:hover {
+              border-color: $dark-primary-color;
+            }
+          }
+          .ng-arrow, .ng-clear {
+            color: $dark-primary-color;
+          }
+        }
+
+        &.ng-select-focused .ng-select-container.ng-appearance-outline:hover:after {
+          border-color: $dark-primary-color;
+        }
+      }
+
+      input {
+        color: $dark-text-color;
+      }
+
+      .ng-select.ng-select-multiple .ng-select-container .ng-value-container {
+        .ng-value {
+          background: rgba(222, 130, 43, 0.7);
+        }
+      }
+
+      &.is-invalid {
+        .ng-select {
+          .ng-select-container {
+            .ng-value-container .ng-placeholder {
+              color: $dark-error-color;
+            }
+
+            &.ng-appearance-outline:after {
+              border-color: $dark-error-color;
+              &:hover {
+                border-color: $dark-error-color;
+              }
+            }
+          }
+          .ng-arrow, .ng-clear {
+            color: $dark-error-color;
+          }
+
+          &.ng-select-focused .ng-select-container.ng-appearance-outline:hover:after {
+            border-color: $dark-error-color;
+          }
+        }
+      }
+    }
+
+    .ng-dropdown-panel {
+      background: $dark-inner-bg-color;
+      .ng-dropdown-panel-items {
+        .ng-option {
+          color: $dark-text-color;
+          &.ng-option-selected {
+            color: $dark-primary-color;
+          }
+          .ng-tag-label {
+            color: $dark-text-color;
+          }
+        }
+      }
+    }
+
+    .mat-option {
+      background-color: $dark-inner-bg-color;
+      color: $dark-text-color;
+
+      &:hover {
+        background-color: $dark-inner-bg-color;
+        opacity: 0.8;
+      }
+    }
+
+    .mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+      color: $dark-primary-color;
+      background-color: $dark-inner-bg-color;
+    }
+
+    .mat-hint {
+      color: $dark-primary-color;
+    }
+
+    .mat-dialog-container {
+      background: $dark-inner-bg-color;
+      color: $dark-text-color;
+    }
+
+    .uppy-Root {
+      background: $dark-inner-bg-color;
+
+      .uppy-DashboardContent-bar, .uppy-StatusBar {
+        color: $dark-primary-color;
+        background: $dark-inner-bg-color;
+        border-color: $dark-primary-color;
+      }
+
+      .uppy-DashboardItem {
+        color: $dark-primary-color;
+        border-color: $dark-primary-color;
+      }
+
+      .uppy-DashboardItem-status {
+        color: $dark-primary-color-faded;
+      }
+
+      .uppy-StatusBar:before {
+        background: transparent;
+      }
+
+      .uppy-StatusBar-progress {
+        background-color: $dark-primary-color-faded;
+      }
+
+      .uppy-StatusBar-spinner {
+        fill: $dark-primary-color-faded;
+      }
+
+      .uppy-StatusBar-statusPrimary {
+        color: $dark-primary-color;
+      }
+
+      .uppy-Dashboard-inner {
+        border-color: $dark-primary-color;
+        background: transparent;
+
+        .uppy-Dashboard-innerWrap {
+          background: transparent;
+
+          .uppy-Dashboard-AddFiles {
+            border-color: $dark-primary-color;
+
+            .uppy-Dashboard-AddFiles-title {
+              color: $dark-text-color;
+            }
+
+            .uppy-Dashboard-AddFiles-title button {
+              color: $dark-primary-color;
+              border-bottom-color: $dark-primary-color;
+            }
+          }
+        }
+      }
+    }
+
+    .mat-snack-bar-container {
+      color: $dark-primary-color;
+      border: 1px solid $dark-primary-color-faded;
+    }
+
+    .mat-menu-panel {
+      background-color: $dark-inner-bg-color;
+
+      .header-tabs-text {
+        color: $dark-text-color;
+      }
+    }
+
+    .mat-checkbox {
+      .mat-checkbox-frame {
+        border-color: $dark-primary-color-faded;
+      }
+
+      &.mat-checkbox-checked.mat-primary .mat-checkbox-background {
+        background-color: $dark-primary-color-faded;
+      }
+
+      &:active, &.mat-checkbox-checked {
+        &:not(.mat-checkbox-disabled).mat-primary {
+          .mat-ripple-element {
+            background: $dark-primary-color;
+          }
+        }
+      }
+    }
   }
 }

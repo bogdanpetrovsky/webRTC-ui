@@ -1,0 +1,9 @@
+@import "src/styles/variables";
+
+.user-profile-container {
+  width: 900px;
+
+  @media screen and (max-width: $break-xs){
+    width: calc(100% - #{$ld-offset-md * 2});
+  }
+}

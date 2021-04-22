@@ -1,0 +1,25 @@
+<div class="multiselect" [ngClass]="{'is-invalid': config.isInvalid}">
+  <ng-select (search)="onInputChange()"
+             [(ngModel)]="config.selectedItems"
+             [multiple]="!config.isSingleSelect()"
+             [loading]="isLoading || config.isLoading"
+             [placeholder]="config.placeholder"
+             [appendTo]="'body'"
+             [bindLabel]="config.label"
+             [notFoundText]="config.getNotFoundText()"
+             [appearance]="'outline'"
+             (change)="onSelect()"
+             [addTag]="config.addTag"
+             (add)="config.updateSelection()"
+  >
+    <ng-option *ngFor="let item of config.items"
+               [value]="item"
+               [disabled]="item.disabled"
+    >{{item[config.label]}}</ng-option>
+  </ng-select>
+  <mat-error class="multiselect-errors" *ngIf="config.isInvalid">
+    {{config.errorMessage || 'This field is required'}}
+  </mat-error>
+</div>
+
+

@@ -1,7 +1,7 @@
 @import "src/styles/variables";
 
 $default-panel-width: 300px;
-.container {
+.main-container {
   height: 100%;
 
   .video-container {
@@ -9,7 +9,7 @@ $default-panel-width: 300px;
   }
 }
 
-.content-container {
+.main-content-container {
   display: flex;
   justify-content: space-between;
   height: 100%;
@@ -77,4 +77,22 @@ $default-panel-width: 300px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
   width: $default-panel-width + $default-offset * 2;
+}
+
+@media screen and (max-width: $break-xs){
+  .main-container {
+    .active-users-panel {
+
+      border: none;
+      width: 100%;
+
+      .panel-title {
+        text-align: center;
+        padding-left: 0;
+      }
+    }
+    .video-chat-container {
+      display: none;
+    }
+  }
 }

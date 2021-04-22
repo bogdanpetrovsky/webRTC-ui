@@ -1,0 +1,19 @@
+@import "variables";
+
+.row-form-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  .rtc-input {
+    width: calc(50% - #{$ld-offset-sm});
+  }
+
+  @media screen and (max-width: $break-xs){
+    display: block;
+
+    .rtc-input {
+      width: 100%;
+    }
+  }
+}

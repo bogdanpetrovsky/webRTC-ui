@@ -5,4 +5,8 @@
   width: 375px;
   bottom: 0;
   right: 0;
+
+  @media screen and (max-width:  $break-xs) {
+    width: 100%;
+  }
 }

@@ -30,12 +30,12 @@
   }
 }
 
-.sign-in-container, .sign-up-container {
+.sign-in-container, .sign-up-container, .user-profile-container {
   width: 400px;
   background: #e8f0fe29;
   border: 2px solid $primary-blue;
 
-  .sign-in-form, .sign-up-form {
+  .sign-in-form, .sign-up-form, .user-profile-form {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -54,4 +54,24 @@
 .spinner-container {
   display: flex;
   justify-content: center;
+}
+
+@media screen and (max-width:  $break-xs) {
+  .auth-container {
+    .auth-content {
+      .auth-content-inner {
+        padding-top: 0;
+        vertical-align: top;
+      }
+
+      .auth-form-container {
+        padding: $ld-offset-sm;
+        margin: $ld-offset-md;
+      }
+    }
+  }
+
+  .sign-in-container, .sign-up-container, .user-profile-container {
+    width: calc(100% - #{$ld-offset-md * 2});
+  }
 }

@@ -3,7 +3,7 @@
     <div class="auth-content-inner">
       <div class="sign-up-container auth-form-container">
         <form [formGroup]="signUpForm" *ngIf="!inProgress" class="sign-up-form">
-          <mat-form-field appearance="outline" >
+          <mat-form-field appearance="outline" class="rtc-input">
             <mat-label>Email</mat-label>
             <label>
               <input matInput placeholder="Email" type="email" formControlName="email" autocomplete="off" required>

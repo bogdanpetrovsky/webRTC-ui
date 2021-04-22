@@ -1,1 +1,66 @@
-<button (click)="changeTheme()">Theme</button>
+<div class="auth-container">
+  <div class="auth-content">
+    <div class="auth-content-inner">
+      <div class="user-profile-container auth-form-container">
+        <form [formGroup]="profileForm" class="user-profile-form">
+          <div class="row-form-container">
+            <mat-form-field appearance="outline" class="rtc-input">
+              <mat-label>Name</mat-label>
+              <label>
+                <input matInput placeholder="Name" type="text" formControlName="name" required>
+              </label>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="rtc-input">
+              <mat-label>Surname</mat-label>
+              <label>
+                <input matInput placeholder="Surname" type="text" formControlName="surName" required>
+              </label>
+            </mat-form-field>
+          </div>
+<!--          <app-multiselect [config]="{}"></app-multiselect>-->
+          <div class="row-form-container">
+            <mat-form-field appearance="outline" class="rtc-input">
+              <mat-label>Gender</mat-label>
+              <mat-select>
+                <mat-option [value]="'male'">Male</mat-option>
+                <mat-option [value]="'female'">Female</mat-option>
+                <mat-option [value]="'unknown'">Not selected</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="rtc-input">
+              <mat-label>Age</mat-label>
+              <label>
+                <input matInput placeholder="Age" type="number" formControlName="age" required>
+              </label>
+            </mat-form-field>
+          </div>
+          <mat-form-field appearance="outline" class="rtc-input">
+            <mat-label>About</mat-label>
+            <label>
+              <textarea #aboutMe matInput
+                        placeholder="About"
+                        formControlName="about"
+                        required maxlength="1000">
+              </textarea>
+            </label>
+            <mat-hint align="end">{{aboutMe.value.length}} / 20000</mat-hint>
+            <mat-error *ngIf="about.errors && about.errors.required">
+              <span>This field is required.</span>
+            </mat-error>
+          </mat-form-field>
+
+          <button class="sign-up-button" *ngIf="!inProgress"
+                  mat-raised-button
+                  (click)="updateProfile()"
+          >
+            Submit
+          </button>
+          <div class="spinner-container">
+            <mat-progress-spinner mode="indeterminate" [diameter]="75" *ngIf="inProgress"></mat-progress-spinner>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+

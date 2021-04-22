@@ -32,7 +32,6 @@
   background: $active-bg-color;
   padding: 10px;
   border-top-left-radius: $default-thumbnail-border-radius;
-  border-top-right-radius: $default-thumbnail-border-radius;
 
   .contact-link {
     text-decoration: none;
@@ -47,6 +46,10 @@
       color: #FFF;
       padding: $ld-offset-sm;
     }
+  }
+
+  @media screen and (max-width:  $break-xs) {
+    border-top-left-radius: 0;
   }
 }
 

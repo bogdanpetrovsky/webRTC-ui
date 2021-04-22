@@ -6,7 +6,7 @@ import { HeaderComponent } from './layout/header/header.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
@@ -18,6 +18,9 @@ import { ProfileComponent } from './auth/components/profile/profile.component';
 import { AppRoutingModule } from './app-routing.module';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
+import { MultiselectComponent } from './blocks/multiselect/multiselect.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,8 @@ import { MatIconModule } from '@angular/material/icon';
     ShellComponent,
     SignInComponent,
     SignUpComponent,
-    ProfileComponent
+    ProfileComponent,
+    MultiselectComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +45,10 @@ import { MatIconModule } from '@angular/material/icon';
     MatProgressSpinnerModule,
     MatIconModule,
     RouterModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatSelectModule,
+    FormsModule,
+    NgSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]
