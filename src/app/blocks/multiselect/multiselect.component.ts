@@ -8,7 +8,7 @@ import * as EventEmitter from 'events';
 })
 export class MultiselectComponent implements OnInit {
 @Input() config: any;
-  @Output() changeEvent = new EventEmitter();
+@Output() changeEvent = new EventEmitter();
   isLoading: boolean;
 
   constructor() { }

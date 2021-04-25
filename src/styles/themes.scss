@@ -371,5 +371,9 @@ body {
         }
       }
     }
+
+    .chat-container {
+      border: 1px solid $dark-primary-color;
+    }
   }
 }

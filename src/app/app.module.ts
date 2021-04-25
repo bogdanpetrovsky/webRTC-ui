@@ -48,7 +48,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
     AppRoutingModule,
     MatSelectModule,
     FormsModule,
-    NgSelectModule
+    NgSelectModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

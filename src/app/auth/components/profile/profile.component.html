@@ -17,7 +17,7 @@
               </label>
             </mat-form-field>
           </div>
-<!--          <app-multiselect [config]="{}"></app-multiselect>-->
+          <app-multiselect [config]="{}"></app-multiselect>
           <div class="row-form-container">
             <mat-form-field appearance="outline" class="rtc-input">
               <mat-label>Gender</mat-label>
@@ -40,6 +40,8 @@
               <textarea #aboutMe matInput
                         placeholder="About"
                         formControlName="about"
+                        cdkTextareaAutosize
+                        cdkAutosizeMinRows="4"
                         required maxlength="1000">
               </textarea>
             </label>

@@ -1,16 +1,15 @@
 <div class="multiselect" [ngClass]="{'is-invalid': config.isInvalid}">
   <ng-select (search)="onInputChange()"
              [(ngModel)]="config.selectedItems"
-             [multiple]="!config.isSingleSelect()"
+             [multiple]="true"
              [loading]="isLoading || config.isLoading"
              [placeholder]="config.placeholder"
              [appendTo]="'body'"
              [bindLabel]="config.label"
-             [notFoundText]="config.getNotFoundText()"
+             [notFoundText]="'Interests not found'"
              [appearance]="'outline'"
              (change)="onSelect()"
              [addTag]="config.addTag"
-             (add)="config.updateSelection()"
   >
     <ng-option *ngFor="let item of config.items"
                [value]="item"
