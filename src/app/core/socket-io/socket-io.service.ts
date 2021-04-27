@@ -13,38 +13,27 @@ export interface WSMessageInterface {
 })
 export class SocketIoService {
   socket;
-  private message = new Subject<WSMessageInterface>();
-  message$ = this.message.asObservable();
+  private activeUsers = new Subject<any>();
+  users$ = this.activeUsers.asObservable();
   peerConnection = new RTCPeerConnection();
   isAlreadyCalling = false;
 
   constructor() {}
 
   initialize(): void {
-
     this.socket = io(environment.apiUrl);
-    this.peerConnection.ontrack = ({ streams: [stream] }) => {
-      const remoteVideo = document.getElementById('remote-video') as HTMLVideoElement;
-      if (remoteVideo) {
-        remoteVideo.srcObject = stream;
-      }
-    };
 
-    this.socket.on('message', (message) => {
-      const messageObj = JSON.parse(message);
-      this.message.next(messageObj);
+    this.socket.on('connection', () => {
+      // either with send()
+      this.socket.emit('someEv', 'fuck you');
+      this.socket.send('Hello');
+
+      // or with emit() and custom event names
+      this.socket.emit('disconnect');
     });
 
     this.socket.on('update-user-list', ({ users }) => {
-      // const activeUserContainer = document.getElementById('active-user-container');
-
-      users.forEach((socketId) => {
-        const alreadyExistingUser = document.getElementById(socketId);
-        if (!alreadyExistingUser) {
-          // const userContainerEl = createUserItemContainer(socketId);
-          // activeUserContainer.appendChild(userContainerEl);
-        }
-      });
+      this.activeUsers.next(users);
     });
 
     this.socket.on('remove-user', ({ socketId }) => {
@@ -75,10 +64,18 @@ export class SocketIoService {
       );
 
       if (!this.isAlreadyCalling) {
-        // callUser(data.socket);
+        this.callUser(data.socket);
         this.isAlreadyCalling = true;
       }
     });
+
+    this.peerConnection.ontrack = ({ streams: [stream] }) => {
+      const remoteVideo = (document.getElementById('remote-video')) as HTMLVideoElement;
+      console.log(remoteVideo, stream);
+      if (remoteVideo) {
+        remoteVideo.srcObject = stream;
+      }
+    };
 
     this.getMedia().then();
   }
@@ -100,6 +97,16 @@ export class SocketIoService {
     } catch (err) {
       console.log(err);
     }
+  }
+
+  async callUser(socketId): Promise<void> {
+    const offer = await this.peerConnection.createOffer();
+    await this.peerConnection.setLocalDescription(new RTCSessionDescription(offer));
+
+    this.socket.emit('call-user', {
+      offer,
+      to: socketId,
+    });
   }
 
   emitMessage(options: WSMessageInterface): void {
