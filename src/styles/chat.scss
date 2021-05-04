@@ -1,0 +1,12 @@
+@import "variables";
+
+.chat-container {
+  .text-area-container {
+    background: #FFF;
+
+    .send-message {
+      background: $primary-blue;
+      color: $header-bg-color;
+    }
+  }
+}

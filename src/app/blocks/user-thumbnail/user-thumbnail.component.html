@@ -1,0 +1,12 @@
+<div class="user-container">
+  <div class="user-name-container" (click)="openUserInfoModal()">
+    <h4 class="user-name" *ngIf="user.firstName || user.lastName">{{user.firstName}} {{user.lastName}}</h4>
+    <h4 class="user-name" *ngIf="!(user.firstName || user.lastName)">Unknown User</h4>
+  </div>
+  <div class="is-active-icon"></div>
+  <div class="user-bottom-container">
+    <span *ngIf="user.interests">{{user.interests}}</span>
+    <span *ngIf="!user.interests">No interests</span>
+    <button class="rtc-primary-button" mat-flat-button (click)="chatClicked()">Chat</button>
+  </div>
+</div>

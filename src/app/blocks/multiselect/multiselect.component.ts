@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Output } from '@angular/core';
-import * as EventEmitter from 'events';
+import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-multiselect',
@@ -8,7 +8,7 @@ import * as EventEmitter from 'events';
 })
 export class MultiselectComponent implements OnInit {
 @Input() config: any;
-@Output() changeEvent = new EventEmitter();
+@Output() changeEvent = new EventEmitter<boolean>();
   isLoading: boolean;
 
   constructor() { }

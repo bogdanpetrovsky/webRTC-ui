@@ -1,0 +1,37 @@
+.controls {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+
+  .buttons-container {
+    background: black;
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 6px;
+    cursor: pointer;
+
+    &:hover {
+      //height: 40px;
+      //width: 40px;
+    }
+  }
+
+  .full-screen {
+    align-self: flex-end;
+    padding: 12px;
+    cursor: pointer;
+  }
+
+  .bottom-panel {
+    padding: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+  }
+}

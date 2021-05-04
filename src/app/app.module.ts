@@ -21,6 +21,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { MultiselectComponent } from './blocks/multiselect/multiselect.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { PickerModule } from '@ctrl/ngx-emoji-mart';
+import { EmojiModule } from '@ctrl/ngx-emoji-mart/ngx-emoji';
+import { UserThumbnailComponent } from './blocks/user-thumbnail/user-thumbnail.component';
+import { UserInfoModalComponent } from './blocks/user-thumbnail/user-info-modal/user-info-modal.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ChatComponent } from './blocks/chat/chat.component';
+import { VideoControlsComponent } from './blocks/video-controls/video-controls.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +39,11 @@ import { NgSelectModule } from '@ng-select/ng-select';
     SignInComponent,
     SignUpComponent,
     ProfileComponent,
-    MultiselectComponent
+    MultiselectComponent,
+    UserThumbnailComponent,
+    UserInfoModalComponent,
+    ChatComponent,
+    VideoControlsComponent
   ],
   imports: [
     BrowserModule,
@@ -50,6 +61,12 @@ import { NgSelectModule } from '@ng-select/ng-select';
     FormsModule,
     NgSelectModule,
     FormsModule,
+    PickerModule,
+    EmojiModule,
+    MatDialogModule
+  ],
+  entryComponents: [
+    UserInfoModalComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

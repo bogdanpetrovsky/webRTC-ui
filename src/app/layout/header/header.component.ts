@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../auth/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -6,14 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  anonymous: boolean;
+  dark: boolean;
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.dark = this.authService.getActiveTheme() === 'dark';
   }
 
-  changeAnonymousState(): void {
-    this.anonymous = !this.anonymous;
+  changeHeaderState(): void {
+    this.dark = !this.dark;
+    this.authService.setTheme(this.dark ? 'dark' : '');
   }
 }

@@ -2,44 +2,42 @@
   <div class="main-content-container" [ngClass]="{'show-chat': selected}">
     <div class="active-users-panel" id="active-user-container">
       <h3 class="panel-title">Active Users</h3>
-      <div *ngFor="let user of sockets" class="active-user" id="{{user.socketId}}" (click)="select(user)">
-          <span>User: {{user}}</span>
-      </div>
+      <app-user-thumbnail id="{{user.socketId}}"
+                          *ngFor="let user of sockets"
+                          (offerMade)="select(user)"
+                          [user]="user"
+      >
+      </app-user-thumbnail>
     </div>
     <div class="video-chat-container">
       <h2 class="talk-info" *ngIf="!selected">Select active user on the left menu.</h2>
       <h2 class="talk-info" *ngIf="selected">Talking with User</h2>
       <div class="video-container">
         <video autoplay class="remote-video" id="remote-video"></video>
-        <div class="local-video-container">
-          <video autoplay muted class="local-video" id="local-video" [ngClass]="{'moved' : hidden}">
-          </video>
-          <button mat-icon-button class="local-video-close-button" *ngIf="!hidden"
-                  matSuffix
-                  (click)="hidden = !hidden"
-                  [attr.aria-label]="'Hide video'"
-                  type="button"
-          >
-            <mat-icon>cancel</mat-icon>
-          </button>
-
-          <button mat-icon-button class="local-video-show-button" *ngIf="hidden"
-                  matSuffix
-                  (click)="hidden = !hidden"
-                  [attr.aria-label]="'Show video'"
-                  type="button"
-          >
-            <mat-icon>chevron_left</mat-icon>
-          </button>
-        </div>
+        <app-video-controls [call]="callsService" class="controls"></app-video-controls>
       </div>
-      <div class="chat-container">
-        <div class="message-container" *ngFor="let message of [{from: 'Me', text: 'Hi'}, {from: 'Max', text: 'Hi'}, {from: 'Me', text: 'STFU'}]">
-          <p class="message-user">{{message.from}}:</p>
-          <span class="message-text">{{message.text}}</span>
-        </div>
+      <div class="local-video-container">
+        <video autoplay [muted]="true" class="local-video" id="local-video" [ngClass]="{'moved' : hidden}">
+        </video>
+        <button mat-icon-button class="local-video-close-button" *ngIf="!hidden"
+                matSuffix
+                (click)="hidden = !hidden"
+                [attr.aria-label]="'Hide video'"
+                type="button"
+        >
+          <mat-icon>cancel</mat-icon>
+        </button>
 
+        <button mat-icon-button class="local-video-show-button" *ngIf="hidden"
+                matSuffix
+                (click)="hidden = !hidden"
+                [attr.aria-label]="'Show video'"
+                type="button"
+        >
+          <mat-icon>chevron_left</mat-icon>
+        </button>
       </div>
+      <app-chat></app-chat>
     </div>
   </div>
 </div>

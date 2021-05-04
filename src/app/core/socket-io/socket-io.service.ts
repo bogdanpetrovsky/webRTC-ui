@@ -15,6 +15,8 @@ export class SocketIoService {
   socket;
   private activeUsers = new Subject<any>();
   users$ = this.activeUsers.asObservable();
+  private message = new Subject<WSMessageInterface>();
+  message$ = this.message.asObservable();
   peerConnection = new RTCPeerConnection();
   isAlreadyCalling = false;
 

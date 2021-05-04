@@ -11,6 +11,19 @@ body {
     background: $dark-outer-bg-color;
     color: $dark-text-color;
 
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    textarea:-webkit-autofill,
+    textarea:-webkit-autofill:hover,
+    textarea:-webkit-autofill:focus,
+    select:-webkit-autofill,
+    select:-webkit-autofill:hover,
+    select:-webkit-autofill:focus {
+      -webkit-text-fill-color: $dark-text-color;
+      -webkit-box-shadow: 0 0 0 1000px #595959 inset;
+    }
+
     .social-links {
       background: $dark-inner-bg-color;
       .contact-link {
@@ -372,8 +385,69 @@ body {
       }
     }
 
+    .rtc-input {
+      .password-mat-button {
+        color: $dark-primary-color;
+      }
+    }
+
+    .sign-in-container, .sign-up-container, .user-profile-container {
+      border-color: $dark-primary-color;
+    }
+
+    .sign-up-link, .sign-in-link {
+      color: $dark-primary-color;
+    }
+
     .chat-container {
       border: 1px solid $dark-primary-color;
+    }
+
+    .mat-progress-spinner circle, .mat-spinner circle {
+      stroke: $dark-primary-color;
+    }
+
+    .sign-in-button, .sign-up-button {
+      background: transparent;
+      border: 1px solid $dark-primary-color;
+      color: $dark-primary-color;
+    }
+
+    .local-video-show-button {
+      background: $dark-primary-color-faded;
+    }
+
+    .chat-container {
+      .text-area-container {
+        background: $dark-outer-bg-color;
+        color: #FFFFFF;
+
+        .send-message {
+          background: $dark-primary-color-faded;
+          color: $dark-text-color;
+        }
+      }
+    }
+
+    @media screen and (min-width: 1000px) {
+      ::-webkit-scrollbar {
+        background-color: #fff;
+        width: 16px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background-color: $dark-inner-bg-color;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background-color: $dark-primary-color-faded;
+        border-radius: 16px;
+        border: 4px solid $dark-inner-bg-color;
+      }
+
+      ::-webkit-scrollbar-button {
+        display: none
+      }
     }
   }
 }

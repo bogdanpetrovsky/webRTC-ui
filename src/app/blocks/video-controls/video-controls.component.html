@@ -1,0 +1,37 @@
+<div class="controls">
+  <div class="bottom-panel">
+    <div class="mic buttons-container">
+      <button mat-icon-button matSuffix type="button">
+        <span class="material-icons"
+              *ngIf="!call.call.connector.connection.mute"
+              (click)="call.call.connector.connection.muteClicked()">
+          mic_off
+        </span>
+        <span class="material-icons"
+              *ngIf="call.call.connector.connection.mute"
+              (click)="call.call.connector.connection.unmuteClicked()">
+          mic
+        </span>
+      </button>
+    </div>
+    <div class="video-camera buttons-container">
+      <button mat-icon-button matSuffix type="button">
+        <span class="material-icons"
+              *ngIf="!call.call.connector.connection.camera"
+              (click)="call.call.connector.connection.cameraOff()">
+          videocam
+        </span>
+        <span class="material-icons"
+              *ngIf="call.call.connector.connection.camera"
+              (click)="call.call.connector.connection.cameraOn()">
+          videocam_off
+        </span>
+      </button>
+    </div>
+    <div class="call-end buttons-container">
+      <button mat-icon-button matSuffix type="button" style="color: red">
+        <span class="material-icons">call_end</span>
+      </button>
+    </div>
+  </div>
+</div>

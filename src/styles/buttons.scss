@@ -53,3 +53,20 @@
   }
 }
 
+.local-video-show-button {
+  background: $primary-blue;
+}
+
+.rtc-primary-button {
+  font-family: 'Work Sans', sans-serif;
+  width: 75px;
+  background: $primary-blue;
+  color: #FFF;
+  line-height: 25px;
+  height: 25px;
+
+  &.mat-flat-button {
+    line-height: inherit;
+  }
+}
+

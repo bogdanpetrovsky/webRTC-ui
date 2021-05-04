@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { SocketIoService } from '../../core/socket-io/socket-io.service';
+import { ISocketUser } from '../../blocks/data-models/User';
+import { CallsService } from '../../blocks/services/calls.service';
 
-interface ISocketUser {
-  socketId: string;
-  name: string;
-}
+
 
 @Component({
   selector: 'app-main',
@@ -14,10 +13,11 @@ interface ISocketUser {
 
 export class MainComponent implements OnInit {
 selected: boolean;
-hidden: boolean;
+hidden = true;
 sockets: ISocketUser[] = [];
 
-  constructor(private socketIoService: SocketIoService) {
+  constructor(private socketIoService: SocketIoService,
+              public callsService: CallsService) {
   }
 
   ngOnInit(): void {
