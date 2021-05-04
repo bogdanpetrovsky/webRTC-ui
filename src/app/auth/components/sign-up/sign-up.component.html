@@ -38,7 +38,9 @@
             <mat-label>Confirm Password</mat-label>
             <label>
               <input matInput placeholder="Confirm Password" [type]="hide ? 'password' : 'text'"
-                     formControlName="confirmPassword" autocomplete="new-password" required>
+                     formControlName="confirmPassword" autocomplete="new-password" required
+                     [errorStateMatcher]="errorStateMatcher"
+              >
             </label>
             <button mat-icon-button class="password-mat-button"
                     matSuffix
@@ -52,6 +54,10 @@
             <mat-error *ngIf="confirmPasswordField.errors && confirmPasswordField.errors.required">
               Password confirmation is <strong>required</strong>
             </mat-error>
+            <mat-error *ngIf="signUpForm.hasError('notMatching') &&
+               (passwordField.touched && confirmPasswordField.touched)">
+              <span>Passwords do not match!</span>
+            </mat-error>
           </mat-form-field>
           <button class="sign-up-button"
                   mat-raised-button
@@ -59,6 +65,7 @@
           >
             Sign Up
           </button>
+          <p class="errors-container" *ngIf="errors">{{errors}}</p>
         </form>
         <div class="spinner-container">
           <mat-progress-spinner mode="indeterminate" [diameter]="75" *ngIf="inProgress"></mat-progress-spinner>

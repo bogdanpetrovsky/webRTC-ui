@@ -28,6 +28,8 @@ import { UserInfoModalComponent } from './blocks/user-thumbnail/user-info-modal/
 import { MatDialogModule } from '@angular/material/dialog';
 import { ChatComponent } from './blocks/chat/chat.component';
 import { VideoControlsComponent } from './blocks/video-controls/video-controls.component';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { AuthInterceptor } from './auth/interceptors/AuthInterceptor';
 
 @NgModule({
   declarations: [
@@ -63,12 +65,19 @@ import { VideoControlsComponent } from './blocks/video-controls/video-controls.c
     FormsModule,
     PickerModule,
     EmojiModule,
-    MatDialogModule
+    MatDialogModule,
+    HttpClientModule
   ],
   entryComponents: [
     UserInfoModalComponent
   ],
-  providers: [],
+  providers: [
+    {
+      provide : HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

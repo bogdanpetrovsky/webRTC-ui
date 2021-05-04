@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
+import { IUser } from '../../../blocks/data-models/User';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-in',
@@ -13,6 +16,8 @@ export class SignInComponent implements OnInit {
 });
   inProgress: boolean;
   hide = true;
+  errors: string;
+
 
   get emailField(): AbstractControl {
     return this.signInForm.get('email');
@@ -22,12 +27,24 @@ export class SignInComponent implements OnInit {
     return this.signInForm.get('password');
   }
 
-  constructor() { }
+  constructor(private authService: AuthService,
+              private router: Router) { }
 
   ngOnInit(): void {
   }
 
   signIn(): void {
-    this.inProgress = !this.inProgress;
+    if (this.signInForm.invalid) { this.signInForm.markAllAsTouched(); return ; }
+    this.inProgress = true;
+    this.authService.signIn({email: this.emailField.value, password: this.passwordField.value}).subscribe(
+      (user: IUser) => {
+        console.log(user);
+        this.inProgress = false;
+        this.router.navigate(['']).then();
+      },
+      (e) => {
+        this.inProgress = false;
+        this.errors = e.toString().length > 20 ? e : 'Something went wrong!';
+      });
   }
 }

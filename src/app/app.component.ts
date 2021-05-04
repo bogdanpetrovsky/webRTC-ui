@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
   constructor(private socketIOService: SocketIoService,
               private authService: AuthService,
               private renderer: Renderer2) {
+    this.authService.initialize();
     this.socketIOService.initialize();
   }
 
