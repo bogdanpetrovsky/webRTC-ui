@@ -43,7 +43,7 @@ export class AuthService {
     return this.http.post<IUser>(environment.apiUrl + '/sign-up', user).toPromise();
   }
 
-  signIn(user): Observable<any> {
+  signIn(user): Observable<LoginResponseInterface> {
     const params = { email: user.email, password: user.password };
     return this.http.post<LoginResponseInterface>(environment.apiUrl + '/sign-in', params);
   }
@@ -98,6 +98,6 @@ export class AuthService {
   }
 
   isSignedIn(): boolean {
-    return false;
+    return !!this.getToken();
   }
 }

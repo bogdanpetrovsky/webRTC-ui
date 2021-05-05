@@ -5,7 +5,10 @@
   </div>
   <div class="is-active-icon"></div>
   <div class="user-bottom-container">
-    <span *ngIf="user.interests">{{user.interests}}</span>
+    <span *ngIf="user.interests">
+      Interests:
+      <span *ngFor="let interest of user.interests"> {{interest.name}} •</span>
+    </span>
     <span *ngIf="!user.interests">No interests</span>
     <button class="rtc-primary-button" mat-flat-button (click)="chatClicked()">Chat</button>
   </div>

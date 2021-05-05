@@ -1,5 +1,5 @@
 <div class="multiselect" [ngClass]="{'is-invalid': config.isInvalid}">
-  <ng-select (search)="onInputChange()"
+  <ng-select (search)="onInputChange($event)"
              [(ngModel)]="config.selectedItems"
              [multiple]="true"
              [loading]="isLoading || config.isLoading"

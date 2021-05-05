@@ -17,11 +17,11 @@
               </label>
             </mat-form-field>
           </div>
-          <app-multiselect [config]="{}"></app-multiselect>
+          <app-multiselect [config]="interestsConfig"></app-multiselect>
           <div class="row-form-container">
             <mat-form-field appearance="outline" class="rtc-input">
               <mat-label>Gender</mat-label>
-              <mat-select>
+              <mat-select formControlName="gender">
                 <mat-option [value]="'male'">Male</mat-option>
                 <mat-option [value]="'female'">Female</mat-option>
                 <mat-option [value]="'unknown'">Not selected</mat-option>

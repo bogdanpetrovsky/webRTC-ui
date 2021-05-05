@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { IUser } from '../../blocks/data-models/User';
+import { Observable } from 'rxjs';
 
 
 export interface UsersResponseInterface {
@@ -16,7 +17,7 @@ export interface UsersResponseInterface {
 export class UsersService {
   constructor(private http: HttpClient) {}
 
-  update(id: number, user: IUser): any {
+  update(id: number, user: IUser): Observable<IUser> {
     return this.http.patch<IUser>(environment.apiUrl + '/users/' + id, user);
   }
 
@@ -30,6 +31,12 @@ export class UsersService {
         limit: limit.toString(),
         offset: offset.toString()
       }
+    });
+  }
+
+  searchByTitle(query): Observable<string[]> {
+    return this.http.get<string[]>(`${environment.apiUrl}/users/interests-search`, {
+      params: { query }
     });
   }
 }

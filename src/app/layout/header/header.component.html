@@ -6,14 +6,14 @@
     </h1>
   </div>
   <div class="navigation-container">
-<!--    <a mat-flat-button routerLink="/sign-in" color="primary">Sign In</a>-->
-    <div class="menu-container" [matMenuTriggerFor]="menu">
+    <a *ngIf="!authService.isSignedIn()" mat-flat-button routerLink="/sign-in" color="primary">Sign In</a>
+    <div *ngIf="authService.isSignedIn()" class="menu-container" [matMenuTriggerFor]="menu">
       <span class="material-icons-outlined menu-icon">menu</span>
     </div>
     <mat-menu #menu="matMenu" class="manage-member-menu">
       <div class="menu-navigation">
-        <a mat-flat-button routerLink="/profile" color="primary">Profile</a>
-        <a mat-flat-button color="warn">Log Out</a>
+        <a class="navigation-link" mat-flat-button routerLink="/profile" color="primary">Profile</a>
+        <a class="navigation-link" mat-flat-button (click)="authService.logOut()" routerLink="/sign-in" color="warn">Log Out</a>
       </div>
     </mat-menu>
   </div>

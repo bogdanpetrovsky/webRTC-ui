@@ -9,7 +9,7 @@ import { AuthService } from '../../auth/services/auth.service';
 export class HeaderComponent implements OnInit {
   dark: boolean;
 
-  constructor(private authService: AuthService) { }
+  constructor(public authService: AuthService) { }
 
   ngOnInit(): void {
     this.dark = this.authService.getActiveTheme() === 'dark';

@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { SocketIoService } from './core/socket-io/socket-io.service';
 import { AuthService } from './auth/services/auth.service';
 
@@ -7,7 +7,7 @@ import { AuthService } from './auth/services/auth.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   title = 'myWebRTC';
 
   constructor(private socketIOService: SocketIoService,
@@ -23,6 +23,10 @@ export class AppComponent implements OnInit {
       this.setTheme(theme);
       this.authService.themeChanged(theme);
     });
+  }
+
+  ngOnDestroy(): void {
+    this.socketIOService.destroy();
   }
 
   setTheme(newTheme?): void {

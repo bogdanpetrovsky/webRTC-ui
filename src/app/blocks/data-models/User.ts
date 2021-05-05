@@ -1,6 +1,13 @@
+import { IInterest } from './Interest';
+
 export interface ISocketUser {
-  socketId: string;
-  name: string;
+  id: string;
+  data: string;
+}
+
+export interface ISocketUserParsed {
+  id: string;
+  data: User | IUser;
 }
 
 export interface IUser {
@@ -11,6 +18,8 @@ export interface IUser {
   about?: string;
   imageUrl?: string;
   interests?: string;
+  gender?: string;
+  age?: number;
 }
 
 export class User {
@@ -20,7 +29,9 @@ export class User {
   lastName?: string;
   about?: string;
   imageUrl?: string;
-  interests?: string;
+  interests?: IInterest[];
+  gender?: string;
+  age?: number;
 
   constructor(options?: IUser) {
     if (options) {
@@ -34,8 +45,10 @@ export class User {
     if (user.lastName) { this.lastName = user.lastName; }
     if (user.email) { this.email = user.email; }
     if (user.about) { this.about = user.about; }
-    if (user.interests) { this.interests = user.interests; }
+    if (user.interests) { this.interests = JSON.parse(user.interests); }
     if (user.imageUrl) { this.imageUrl = user.imageUrl; }
+    if (user.age) { this.age = user.age; }
+    if (user.gender) { this.gender = user.gender; }
   }
 
   toJson(): IUser {
@@ -46,7 +59,9 @@ export class User {
       lastName: this.lastName,
       about: this.about,
       imageUrl: this.imageUrl,
-      interests: this.interests,
+      interests: JSON.stringify(this.interests),
+      age: this.age,
+      gender: this.gender,
     };
   }
 }

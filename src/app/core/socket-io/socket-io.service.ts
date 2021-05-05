@@ -2,6 +2,7 @@ import io from 'socket.io-client';
 import { environment } from '../../../environments/environment';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { AuthService } from '../../auth/services/auth.service';
 
 export interface WSMessageInterface {
   event: string;
@@ -15,35 +16,37 @@ export class SocketIoService {
   socket;
   private activeUsers = new Subject<any>();
   users$ = this.activeUsers.asObservable();
+  private removedUser = new Subject<any>();
+  removedUser$ = this.removedUser.asObservable();
   private message = new Subject<WSMessageInterface>();
   message$ = this.message.asObservable();
   peerConnection = new RTCPeerConnection();
   isAlreadyCalling = false;
 
-  constructor() {}
+  constructor(private authService: AuthService) {}
 
   initialize(): void {
-    this.socket = io(environment.apiUrl);
+    const token = this.authService.getToken();
+    if (!token) { return ; }
+
+    this.socket = io(environment.apiUrl, {
+      auth: { token },
+      query: { data: JSON.stringify(this.authService.getUser()) },
+    });
 
     this.socket.on('connection', () => {
       // either with send()
-      this.socket.emit('someEv', 'fuck you');
       this.socket.send('Hello');
-
-      // or with emit() and custom event names
-      this.socket.emit('disconnect');
     });
 
     this.socket.on('update-user-list', ({ users }) => {
       this.activeUsers.next(users);
     });
 
-    this.socket.on('remove-user', ({ socketId }) => {
-      const elToRemove = document.getElementById(socketId);
-
-      if (elToRemove) {
-        elToRemove.remove();
-      }
+    this.socket.on('remove-user', ({socketId}) => {
+      console.log('removed user');
+      console.log(socketId);
+      this.removedUser.next(socketId);
     });
 
     this.socket.on('call-made', async (data) => {
@@ -113,5 +116,11 @@ export class SocketIoService {
 
   emitMessage(options: WSMessageInterface): void {
     this.socket.emit(options.event, options.data);
+  }
+
+  destroy(): void {
+    this.socket.emit('disconnect');
+    console.log('disconnecting');
+    this.socket.disconnect(true);
   }
 }

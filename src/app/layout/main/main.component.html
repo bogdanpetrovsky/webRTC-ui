@@ -2,10 +2,10 @@
   <div class="main-content-container" [ngClass]="{'show-chat': selected}">
     <div class="active-users-panel" id="active-user-container">
       <h3 class="panel-title">Active Users</h3>
-      <app-user-thumbnail id="{{user.socketId}}"
+      <app-user-thumbnail id="{{user.id}}"
                           *ngFor="let user of sockets"
-                          (offerMade)="select(user)"
-                          [user]="user"
+                          (offerMade)="select(user.id)"
+                          [user]="user.data"
       >
       </app-user-thumbnail>
     </div>

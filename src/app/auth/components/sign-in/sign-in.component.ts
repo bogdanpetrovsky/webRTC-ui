@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
-import { IUser } from '../../../blocks/data-models/User';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 
@@ -37,8 +36,10 @@ export class SignInComponent implements OnInit {
     if (this.signInForm.invalid) { this.signInForm.markAllAsTouched(); return ; }
     this.inProgress = true;
     this.authService.signIn({email: this.emailField.value, password: this.passwordField.value}).subscribe(
-      (user: IUser) => {
-        console.log(user);
+      (response) => {
+        this.authService.setToken(response.token);
+        this.authService.setUser(response.user);
+        console.log(response);
         this.inProgress = false;
         this.router.navigate(['']).then();
       },

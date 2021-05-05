@@ -17,3 +17,21 @@
     }
   }
 }
+
+.menu-navigation {
+  display: flex;
+  flex-direction: column;
+
+  .navigation-link {
+    width: 100px;
+    margin: 10px 0 0 0;
+
+    &:first-of-type {
+      margin-top: 0;
+    }
+  }
+}
+
+.rtc-input {
+  font-family: 'Work Sans', sans-serif;
+}

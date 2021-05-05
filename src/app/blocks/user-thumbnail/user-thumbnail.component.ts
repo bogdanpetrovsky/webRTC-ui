@@ -15,6 +15,7 @@ export class UserThumbnailComponent implements OnInit {
   constructor(private dialog: MatDialog) { }
 
   ngOnInit(): void {
+    console.log(this.user);
   }
 
   chatClicked(): void {
