@@ -81,8 +81,8 @@ $default-panel-width: 300px;
 .local-video {
   position: absolute;
   border: 1px solid #cddfe7;
-  bottom: 70px;
-  right: 20px;
+  bottom: 80px;
+  right: 10px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
   width: $default-panel-width + $default-offset * 2;
@@ -126,28 +126,8 @@ $default-panel-width: 300px;
         }
       }
 
-      .local-video-container {
-        .local-video-close-button {
-          display: block;
-          position: absolute;
-          bottom: 219px;
-          right: 0;
-        }
-
-        .local-video-show-button {
-          border-radius: 8px;
-          display: block;
-          position: absolute;
-          bottom: 100px;
-          right: 0;
-          height: 200px;
-          width: 19px;
-          color: #FFFFFF;
-        }
-      }
-
       .local-video {
-        width: calc(100% - 40px);
+        width: 35%;
 
         &.moved {
           right: -1340px;

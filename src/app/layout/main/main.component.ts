@@ -13,7 +13,6 @@ import { CallsService } from '../../blocks/services/calls.service';
 
 export class MainComponent implements OnInit {
 selected: boolean;
-hidden = true;
 sockets: ISocketUserParsed[] = [];
 
   constructor(private socketIoService: SocketIoService,

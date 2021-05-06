@@ -15,27 +15,9 @@
       <div class="video-container">
         <video autoplay class="remote-video" id="remote-video"></video>
         <app-video-controls [call]="callsService" class="controls"></app-video-controls>
-      </div>
-      <div class="local-video-container">
-        <video autoplay [muted]="true" class="local-video" id="local-video" [ngClass]="{'moved' : hidden}">
-        </video>
-        <button mat-icon-button class="local-video-close-button" *ngIf="!hidden"
-                matSuffix
-                (click)="hidden = !hidden"
-                [attr.aria-label]="'Hide video'"
-                type="button"
-        >
-          <mat-icon>cancel</mat-icon>
-        </button>
-
-        <button mat-icon-button class="local-video-show-button" *ngIf="hidden"
-                matSuffix
-                (click)="hidden = !hidden"
-                [attr.aria-label]="'Show video'"
-                type="button"
-        >
-          <mat-icon>chevron_left</mat-icon>
-        </button>
+        <div class="local-video-container">
+          <video autoplay [muted]="true" class="local-video" id="local-video"></video>
+        </div>
       </div>
       <app-chat></app-chat>
     </div>

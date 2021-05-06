@@ -3,6 +3,7 @@ import { environment } from '../../../environments/environment';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { AuthService } from '../../auth/services/auth.service';
+import { IRtcMessage } from '../../blocks/data-models/RtcMessage';
 
 export interface WSMessageInterface {
   event: string;
@@ -13,14 +14,18 @@ export interface WSMessageInterface {
   providedIn: 'root'
 })
 export class SocketIoService {
-  socket;
   private activeUsers = new Subject<any>();
   users$ = this.activeUsers.asObservable();
   private removedUser = new Subject<any>();
   removedUser$ = this.removedUser.asObservable();
   private message = new Subject<WSMessageInterface>();
   message$ = this.message.asObservable();
+  private incomingMessage = new Subject<IRtcMessage>();
+  incomingMessage$ = this.incomingMessage.asObservable();
+
+  socket;
   peerConnection = new RTCPeerConnection();
+  remoteTracks: RTCRtpSender[] = [];
   isAlreadyCalling = false;
 
   constructor(private authService: AuthService) {}
@@ -62,6 +67,9 @@ export class SocketIoService {
       });
     });
 
+    this.socket.on('incoming-message', (mes: IRtcMessage) => {
+      this.incomingMessage.next(mes);
+    });
 
     this.socket.on('answer-made', async (data) => {
       await this.peerConnection.setRemoteDescription(
@@ -69,14 +77,14 @@ export class SocketIoService {
       );
 
       if (!this.isAlreadyCalling) {
-        this.callUser(data.socket);
+        await this.callUser(data.socket);
         this.isAlreadyCalling = true;
       }
     });
 
     this.peerConnection.ontrack = ({ streams: [stream] }) => {
       const remoteVideo = (document.getElementById('remote-video')) as HTMLVideoElement;
-      console.log(remoteVideo, stream);
+      console.log(remoteVideo, stream, 1);
       if (remoteVideo) {
         remoteVideo.srcObject = stream;
       }
@@ -97,7 +105,10 @@ export class SocketIoService {
 
       stream
         .getTracks()
-        .forEach((track) => this.peerConnection.addTrack(track, stream));
+        .forEach((track) => {
+          const pr = this.peerConnection.addTrack(track, stream);
+          this.remoteTracks.push(pr);
+        });
 
     } catch (err) {
       console.log(err);
@@ -122,5 +133,6 @@ export class SocketIoService {
     this.socket.emit('disconnect');
     console.log('disconnecting');
     this.socket.disconnect(true);
+    this.remoteTracks = [];
   }
 }

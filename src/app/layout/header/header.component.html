@@ -6,7 +6,7 @@
     </h1>
   </div>
   <div class="navigation-container">
-    <a *ngIf="!authService.isSignedIn()" mat-flat-button routerLink="/sign-in" color="primary">Sign In</a>
+    <button *ngIf="!authService.isSignedIn()" mat-flat-button class="rtc-primary-button" routerLink="/sign-in" color="primary">Sign In</button>
     <div *ngIf="authService.isSignedIn()" class="menu-container" [matMenuTriggerFor]="menu">
       <span class="material-icons-outlined menu-icon">menu</span>
     </div>

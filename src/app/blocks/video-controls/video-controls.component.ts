@@ -1,5 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { CallsService } from '../services/calls.service';
+import { SocketIoService } from '../../core/socket-io/socket-io.service';
+import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-video-controls',
@@ -8,9 +10,13 @@ import { CallsService } from '../services/calls.service';
 })
 export class VideoControlsComponent implements OnInit {
   @Input() call: CallsService;
-  constructor() { }
+  @Output() hangedUp = new EventEmitter<boolean>();
+  constructor(private socketService: SocketIoService) { }
 
   ngOnInit(): void {
   }
 
+  hangUp(): void {
+    this.socketService.remoteTracks = [];
+  }
 }

@@ -2,8 +2,8 @@ $dark-outer-bg-color: #121212;
 $dark-inner-bg-color: #1e1e1e;
 $dark-text-color: #fff;
 $dark-secondary-text-color: #7a7a7a;
-$dark-primary-color: #bb86fc;
-$dark-primary-color-faded: #bb86fca8;
+$dark-primary-color: #de822b;
+$dark-primary-color-faded: #b65d2a;
 $dark-error-color: red;
 
 body {
@@ -408,7 +408,7 @@ body {
     }
 
     .sign-in-button, .sign-up-button {
-      background: transparent;
+      background: $dark-inner-bg-color;
       border: 1px solid $dark-primary-color;
       color: $dark-primary-color;
     }
@@ -427,6 +427,22 @@ body {
           color: $dark-text-color;
         }
       }
+    }
+
+    .rtc-primary-button {
+      background: $dark-primary-color;
+    }
+
+    .user-container {
+      border-bottom: 1px solid $dark-primary-color;
+
+      .user-name {
+        color: $dark-primary-color;
+      }
+    }
+
+    .message-text {
+      background: $dark-primary-color;
     }
 
     @media screen and (min-width: 1000px) {

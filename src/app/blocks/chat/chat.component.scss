@@ -3,17 +3,23 @@
 $default-panel-width: 300px;
 
 .chat-container {
-  overflow-y: scroll;
-  overflow-x: hidden;
+  position: relative;
+  overflow: hidden;
   width: 100%;
+  min-height: 250px;
   height: 250px;
-  margin-top: 20px;
+  margin-top: $default-offset;
   border: 1px solid $primary-blue;
   padding: $ld-offset-sm;
-  border-radius: 8px 0 0 8px;
+  border-radius: $default-thumbnail-border-radius;
+
+  .messages-container {
+    overflow-y: auto;
+    max-height: 150px;
+  }
 
   .message-container {
-    &:nth-of-type(2n) {
+    &.guest-message {
       text-align: right;
     }
   }
@@ -22,10 +28,13 @@ $default-panel-width: 300px;
     display: inline-block;
     margin-left: $small-offset;
     padding: 2px $ld-offset-sm;
-    background: $primary-blue;
     color: #FFF;
     border-radius: $default-thumbnail-border-radius;
   }
+}
+
+.message-text {
+  background: $primary-blue;
 }
 
 $user-img-height: 30px;
@@ -49,12 +58,13 @@ $send-message-padding: 20px;
   }
 
   .text-area-container {
-    bottom: $ld-offset-sm;
+    bottom: 0;
     padding: 0 $ld-offset-sm;
     display: flex;
     align-items: center;
     margin-bottom: $ld-offset-md;
-    position: sticky;
+    position: absolute;
+    width: calc(100% - 10px);
     margin-top: $small-offset;
 
     .rtc-input {

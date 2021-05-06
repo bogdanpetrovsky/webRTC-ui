@@ -35,3 +35,33 @@
 .rtc-input {
   font-family: 'Work Sans', sans-serif;
 }
+
+.user-container {
+  position: relative;
+  min-height: 70px;
+  border-bottom: 1px solid $primary-blue;
+  padding: $ld-offset-sm;
+
+  .user-name {
+    margin-top: 0;
+    color: $primary-blue;
+    cursor: pointer;
+  }
+
+  .is-active-icon {
+    position: absolute;
+    top: $ld-offset-sm;
+    right: $ld-offset-sm;
+
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #82be5b;
+  }
+
+  .user-bottom-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}

@@ -1,6 +1,7 @@
 @import "src/styles/variables";
 
 .footer {
+  z-index: 5;
   position: absolute;
   width: 375px;
   bottom: 0;
