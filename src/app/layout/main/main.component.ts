@@ -20,6 +20,7 @@ sockets: ISocketUserParsed[] = [];
   }
 
   ngOnInit(): void {
+    this.socketIoService.initialize();
     this.socketIoService.users$.subscribe((users: ISocketUser[]) => {
       this.sockets = [];
       users.forEach((user: ISocketUser) => {

@@ -14,7 +14,6 @@ export class AppComponent implements OnInit, OnDestroy {
               private authService: AuthService,
               private renderer: Renderer2) {
     this.authService.initialize();
-    this.socketIOService.initialize();
   }
 
   ngOnInit(): void {

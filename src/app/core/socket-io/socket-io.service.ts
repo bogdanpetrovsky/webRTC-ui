@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { AuthService } from '../../auth/services/auth.service';
 import { IRtcMessage } from '../../blocks/data-models/RtcMessage';
+import Peer from 'peerjs';
 
 export interface WSMessageInterface {
   event: string;
@@ -23,6 +24,9 @@ export class SocketIoService {
   private incomingMessage = new Subject<IRtcMessage>();
   incomingMessage$ = this.incomingMessage.asObservable();
 
+  videoGrid;
+  myVideo;
+  peer;
   socket;
   peerConnection = new RTCPeerConnection();
   remoteTracks: RTCRtpSender[] = [];
@@ -34,85 +38,64 @@ export class SocketIoService {
     const token = this.authService.getToken();
     if (!token) { return ; }
 
-    this.socket = io(environment.apiUrl, {
-      auth: { token },
-      query: { data: JSON.stringify(this.authService.getUser()) },
+    this.socket = io(environment.apiUrl);
+    this.peer = new Peer(undefined, {
+      host: 'localhost',
+      port: 5000,
+      path: '/peerjs',
     });
 
-    this.socket.on('connection', () => {
-      // either with send()
-      this.socket.send('Hello');
+    this.peer.on('open', (id) => {
+      this.socket.emit('join-room', 'ROOM_ID', id, 'user');
     });
 
-    this.socket.on('update-user-list', ({ users }) => {
-      this.activeUsers.next(users);
-    });
-
-    this.socket.on('remove-user', ({socketId}) => {
-      console.log('removed user');
-      console.log(socketId);
-      this.removedUser.next(socketId);
-    });
-
-    this.socket.on('call-made', async (data) => {
-      await this.peerConnection.setRemoteDescription(
-        new RTCSessionDescription(data.offer)
-      );
-      const answer = await this.peerConnection.createAnswer();
-      await this.peerConnection.setLocalDescription(new RTCSessionDescription(answer));
-
-      this.socket.emit('make-answer', {
-        answer,
-        to: data.socket
-      });
-    });
-
-    this.socket.on('incoming-message', (mes: IRtcMessage) => {
-      this.incomingMessage.next(mes);
-    });
-
-    this.socket.on('answer-made', async (data) => {
-      await this.peerConnection.setRemoteDescription(
-        new RTCSessionDescription(data.answer)
-      );
-
-      if (!this.isAlreadyCalling) {
-        await this.callUser(data.socket);
-        this.isAlreadyCalling = true;
-      }
-    });
-
-    this.peerConnection.ontrack = ({ streams: [stream] }) => {
-      const remoteVideo = (document.getElementById('remote-video')) as HTMLVideoElement;
-      console.log(remoteVideo, stream, 1);
-      if (remoteVideo) {
-        remoteVideo.srcObject = stream;
-      }
-    };
-
+    this.socket.on('createMessage', (message, userName) => console.log(message));
     this.getMedia().then();
   }
 
   async getMedia(): Promise<void> {
-    let stream = null;
+    this.videoGrid = document.getElementById('video-grid') as HTMLVideoElement;
+    this.myVideo = document.createElement('video') as HTMLVideoElement;
+    this.myVideo.muted = true;
+    let myVideoStream;
 
-    try {
-      stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
-      const localVideo = (document.getElementById('local-video')) as HTMLVideoElement ;
-      if (localVideo) {
-        localVideo.srcObject = stream;
-      }
+    navigator.mediaDevices
+    .getUserMedia({
+      audio: true,
+      video: true,
+    })
+    .then((stream) => {
+      myVideoStream = stream;
+      this.addVideoStream(this.myVideo, stream);
 
-      stream
-        .getTracks()
-        .forEach((track) => {
-          const pr = this.peerConnection.addTrack(track, stream);
-          this.remoteTracks.push(pr);
+      this.peer.on('call', (call) => {
+        call.answer(stream);
+        const video = document.createElement('video');
+        call.on('stream', (userVideoStream) => {
+          this.addVideoStream(video, userVideoStream);
         });
+      });
 
-    } catch (err) {
-      console.log(err);
-    }
+      this.socket.on('user-connected', (userId) => {
+        this.connectToNewUser(userId, stream);
+      });
+    });
+  }
+
+  addVideoStream(video, stream): void {
+    video.srcObject = stream;
+    video.addEventListener('loadedmetadata', () => {
+      video.play();
+      this.videoGrid.append(video);
+    });
+  }
+
+  connectToNewUser(userId, stream): void {
+    const call = this.peer.call(userId, stream);
+    const video = document.createElement('video');
+    call.on('stream', (userVideoStream) => {
+      this.addVideoStream(video, userVideoStream);
+    });
   }
 
   async callUser(socketId): Promise<void> {
