@@ -8,6 +8,7 @@
   height: calc(100% - #{$header-height});
   width: 100%;
   overflow: auto;
+  color: #000000;
 
   .auth-content {
     display: table;
@@ -52,7 +53,7 @@
 }
 
 .mat-progress-spinner circle, .mat-spinner circle {
-  stroke: $primary-blue;
+  stroke: $primary-color;
 }
 
 .spinner-container {

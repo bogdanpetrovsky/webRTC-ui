@@ -42,7 +42,6 @@ export class SignUpComponent implements OnInit {
     if (this.signUpForm.invalid) { this.signUpForm.markAllAsTouched(); return ; }
     this.inProgress = true;
     this.authService.signUp({email: this.emailField.value, password: this.passwordField.value}).then((user: IUser) => {
-      console.log(user);
       this.inProgress = false;
       this.router.navigate(['sign-in']).then();
     }).catch((e) => {

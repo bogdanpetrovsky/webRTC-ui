@@ -39,8 +39,9 @@
 .user-container {
   position: relative;
   min-height: 70px;
-  border-bottom: 1px solid $primary-blue;
+  border-bottom: 1px solid rgba(255,255,255, .1);
   padding: $ld-offset-sm;
+  background: rgba(0,0,0, .2);
 
   .user-name {
     margin-top: 0;

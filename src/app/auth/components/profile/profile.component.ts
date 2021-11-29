@@ -65,7 +65,6 @@ export class ProfileComponent implements OnInit {
   }
 
   populateForms(user: User): void {
-    console.log(user);
     this.name.setValue(user.firstName);
     this.surName.setValue(user.lastName);
     this.age.setValue(user.age);
@@ -86,7 +85,6 @@ export class ProfileComponent implements OnInit {
     if (this.profileForm.invalid) { this.profileForm.markAllAsTouched(); return ; }
 
     const userObject = this.getInputData();
-    console.log(userObject);
 
     this.inProgress = true;
     this.userService.update(this.authService.getUserId(), userObject).subscribe(
@@ -96,7 +94,6 @@ export class ProfileComponent implements OnInit {
     },
       (e) => {
         this.inProgress = false;
-        console.log(e);
       });
   }
 

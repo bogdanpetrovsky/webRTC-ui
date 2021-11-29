@@ -21,7 +21,6 @@ sockets: ISocketUserParsed[] = [];
 
   ngOnInit(): void {
     this.socketIoService.users$.subscribe((users: ISocketUser[]) => {
-      console.log(users);
       this.sockets = [];
       users.forEach((user: ISocketUser) => {
         this.sockets.push({id: user.id, data: user.data as any});

@@ -39,7 +39,6 @@ export class SignInComponent implements OnInit {
       (response) => {
         this.authService.setToken(response.token);
         this.authService.setUser(response.user);
-        console.log(response);
         this.inProgress = false;
         this.router.navigate(['']).then();
       },

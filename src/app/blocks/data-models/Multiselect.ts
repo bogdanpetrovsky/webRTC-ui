@@ -80,7 +80,6 @@ export class MultiSelect {
       const itemModel = new this.model(elem);
       this.items.push(itemModel);
       this.selectedItems.push(itemModel);
-      console.log(itemModel);
     } );
   }
 

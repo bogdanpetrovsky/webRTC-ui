@@ -2,33 +2,35 @@
 
 $default-panel-width: 300px;
 .main-container {
-  height: 100%;
-
-  .video-container {
-    height: calc(100% - #{$default-panel-width + $default-offset});
-    position: relative;
-
-    .controls {
-      width: 100%;
-      position: absolute;
-      background: rgba(0, 0, 0, 0.6);
-      bottom: 0;
-      left: 0;
-    }
-  }
 }
 
 .main-content-container {
-  display: flex;
-  justify-content: space-between;
-  height: 100%;
-  width: 100%;
+  //.no-selected-user-placeholder {
+  //  width: 100%;
+  //  display: flex;
+  //  justify-content: center;
+  //  align-items: center;
+  //}
+  //
+  //.no-selected-user-placeholder, .video-chat-container {
+  //  background: $main-dark;
+  //}
+  //
+  //.video-chat-container {
+  //  display: none;
+  //}
+  //
+  //&.show-chat {
+  //  .video-chat-container {
+  //    display: block;
+  //  }
+  //}
 }
 
 .active-users-panel {
   width: $default-panel-width;
   height: 100%;
-  border-right: 1px solid #cddfe7;
+  background: $main-dark-active;
 }
 
 .panel-title {
@@ -112,15 +114,15 @@ $default-panel-width: 300px;
         }
       }
 
+      .no-selected-user-placeholder {
+        display: none;
+      }
+
       .video-chat-container {
         display: none;
       }
 
       &.show-chat {
-        .video-chat-container {
-          display: block;
-        }
-
         .active-users-panel, .talk-info {
           display: none;
         }

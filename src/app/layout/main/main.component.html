@@ -1,25 +1,78 @@
 <div class="main-container">
   <div class="main-content-container" [ngClass]="{'show-chat': selected}">
-    <div class="active-users-panel" id="active-user-container">
-      <h3 class="panel-title">Active Users</h3>
-      <app-user-thumbnail id="{{user.id}}"
-                          *ngFor="let user of sockets"
-                          (offerMade)="select(user.id)"
-                          [user]="user.data"
-      >
-      </app-user-thumbnail>
-    </div>
-    <div class="video-chat-container">
-      <h2 class="talk-info" *ngIf="!selected">Select active user on the left menu.</h2>
-      <h2 class="talk-info" *ngIf="selected">Talking with User</h2>
-      <div class="video-container">
-        <video autoplay class="remote-video" id="remote-video"></video>
-        <app-video-controls [call]="callsService" class="controls"></app-video-controls>
-        <div class="local-video-container">
-          <video autoplay [muted]="true" class="local-video" id="local-video"></video>
+<!--    <div *ngIf="!selected" class="no-selected-user-placeholder">-->
+<!--      <h2 class="talk-info">Select active user on the left menu.</h2>-->
+<!--    </div>-->
+<!--    <div class="video-chat-container">-->
+<!--      <h2 class="talk-info" *ngIf="selected">Talking with User</h2>-->
+<!--      <div class="video-container">-->
+<!--        <video autoplay class="remote-video" id="remote-video"></video>-->
+<!--        <app-video-controls [call]="callsService" class="controls"></app-video-controls>-->
+<!--        <div class="local-video-container">-->
+<!--          <video autoplay [muted]="true" class="local-video" id="local-video"></video>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <app-chat></app-chat>-->
+<!--    </div>-->
+    <div class="main">
+      <div class="active-users-panel" id="active-user-container">
+        <h3 class="panel-title">Active Users</h3>
+        <app-user-thumbnail id="{{user.id}}"
+                            *ngFor="let user of sockets"
+                            (offerMade)="select(user.id)"
+                            [user]="user.data"
+        >
+        </app-user-thumbnail>
+      </div>
+      <div class="main__left">
+        <div class="videos__group">
+          <div id="video-grid">
+
+          </div>
+        </div>
+        <div class="options">
+          <div class="options__left">
+            <div id="stopVideo" class="options__button">
+              <i class="fa fa-video-camera"></i>
+            </div>
+            <div id="muteButton" class="options__button">
+              <i class="fa fa-microphone"></i>
+            </div>
+            <div id="showChat" class="options__button">
+              <i class="fa fa-comment"></i>
+            </div>
+          </div>
+          <div class="options__right">
+            <div id="inviteButton" class="options__button">
+              <i class="fa fa-user-plus"></i>
+            </div>
+          </div>
         </div>
       </div>
-      <app-chat></app-chat>
+      <div class="main__right">
+        <div class="main__chat_window">
+          <div class="messages">
+
+          </div>
+        </div>
+        <div class="main__message_container">
+          <input id="chat_message" type="text" autocomplete="off" placeholder="Type message here...">
+          <div id="send" class="options__button send-message-btn">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+          </div>
+        </div>
+        <div class="social-links">
+          <span>Contact Us:</span>
+          <a href="https://www.linkedin.com/" class="contact-link"><span class="fa fa-linkedin contact-icon"></span></a>
+          <a href="https://www.facebook.com/" class="contact-link"><span class="fa fa-facebook contact-icon"></span></a>
+          <a href="https://www.youtube.com/" class="contact-link"><span class="fa fa-youtube-play contact-icon"></span></a>
+          <a href="https://www.google.com/" class="contact-link google-icon-wrapper">
+            <span class="fa fa-google contact-icon google-icon"></span>
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+
+
