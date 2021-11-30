@@ -1,27 +1,9 @@
-<div class="main-container">
-  <div class="main-content-container" [ngClass]="{'show-chat': selected}">
-<!--    <div *ngIf="!selected" class="no-selected-user-placeholder">-->
-<!--      <h2 class="talk-info">Select active user on the left menu.</h2>-->
-<!--    </div>-->
-<!--    <div class="video-chat-container">-->
-<!--      <h2 class="talk-info" *ngIf="selected">Talking with User</h2>-->
-<!--      <div class="video-container">-->
-<!--        <video autoplay class="remote-video" id="remote-video"></video>-->
-<!--        <app-video-controls [call]="callsService" class="controls"></app-video-controls>-->
-<!--        <div class="local-video-container">-->
-<!--          <video autoplay [muted]="true" class="local-video" id="local-video"></video>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      <app-chat></app-chat>-->
-<!--    </div>-->
-    <div class="main">
+<div class="main-container" >
+  <div class="main-content-container">
+    <div class="main" [ngClass]="{'show-chat': layoutService.showChatEnabled, 'show-active-users' : layoutService.showActiveUsersEnabled }">
       <div class="active-users-panel" id="active-user-container">
         <h3 class="panel-title">Active Users</h3>
-        <app-user-thumbnail id="{{user.id}}"
-                            *ngFor="let user of sockets"
-                            (offerMade)="select(user.id)"
-                            [user]="user.data"
-        >
+        <app-user-thumbnail id="{{user.id}}" *ngFor="let user of sockets" (offerMade)="select(user.id)" [user]="user.data">
         </app-user-thumbnail>
       </div>
       <div class="main__left">
@@ -32,13 +14,19 @@
         </div>
         <div class="options">
           <div class="options__left">
-            <div id="stopVideo" class="options__button">
+            <div id="stopVideo" class="options__button"
+                 [ngClass]="{'background__red': myVideoOff }"
+                 (click)="stopVideoEvent()"
+            >
               <i class="fa fa-video-camera"></i>
             </div>
-            <div id="muteButton" class="options__button">
+            <div id="muteButton" class="options__button"
+                 [ngClass]="{'background__red': myMicrophoneOff }"
+                 (click)="muteMicrophoneEvent()"
+            >
               <i class="fa fa-microphone"></i>
             </div>
-            <div id="showChat" class="options__button">
+            <div id="showChat" class="options__button" (click)="enableShowChat()">
               <i class="fa fa-comment"></i>
             </div>
           </div>
@@ -52,12 +40,14 @@
       <div class="main__right">
         <div class="main__chat_window">
           <div class="messages">
-
           </div>
         </div>
-        <div class="main__message_container">
-          <input id="chat_message" type="text" autocomplete="off" placeholder="Type message here...">
-          <div id="send" class="options__button send-message-btn">
+        <div class="main__message_container" [formGroup]="messageForm">
+          <input id="chat_message" type="text" autocomplete="off"
+                 placeholder="Type message here..." formControlName="message"
+                 (keydown)="keyDownFunction($event)"
+          >
+          <div id="send" class="options__button send-message-btn" (click)="sendMessage()">
             <i class="fa fa-plus" aria-hidden="true"></i>
           </div>
         </div>
@@ -74,5 +64,3 @@
     </div>
   </div>
 </div>
-
-

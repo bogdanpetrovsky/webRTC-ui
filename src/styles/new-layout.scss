@@ -35,7 +35,7 @@ video {
 .options {
   padding: 1rem;
   display: flex;
-  background-color: var(--main-darklg);
+  background-color: $main-darklg;
 }
 
 .options__left {
@@ -112,7 +112,7 @@ video {
 }
 
 .message > b {
-  color: #eeeeee;
+  color: $primary-color;
   display: flex;
   align-items: center;
   text-transform: capitalize;
@@ -125,6 +125,7 @@ video {
 
 .message > span {
   background-color: #eeeeee;
+  color: #000000;
   margin: 1rem 0;
   padding: 1rem;
   border-radius: 5px;
@@ -143,13 +144,44 @@ video {
 .header__back {
   display: none;
   position: absolute;
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   top: 17px;
-  left: 28px;
   color: #fff;
 }
 
 @media (max-width: 700px) {
+  .header__back {
+    display: flex;
+  }
+  .main-container {
+    .main-content-container {
+    }
+  }
+
+  .main {
+    .active-users-panel {
+      display: none;
+    }
+    &.show-chat {
+      .main__right {
+        display: flex;
+        flex: 1;
+      }
+      .main__left {
+        display: none;
+      }
+    }
+
+    &.show-active-users {
+      .main__left, .main-right {
+        display: none;
+      }
+      .active-users-panel {
+        display: block;
+      }
+    }
+  }
+
   .main__right {
     display: none;
   }

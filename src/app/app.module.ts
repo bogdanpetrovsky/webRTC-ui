@@ -25,7 +25,6 @@ import { EmojiModule } from '@ctrl/ngx-emoji-mart/ngx-emoji';
 import { UserThumbnailComponent } from './blocks/user-thumbnail/user-thumbnail.component';
 import { UserInfoModalComponent } from './blocks/user-thumbnail/user-info-modal/user-info-modal.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { ChatComponent } from './blocks/chat/chat.component';
 import { VideoControlsComponent } from './blocks/video-controls/video-controls.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './auth/interceptors/AuthInterceptor';
@@ -42,7 +41,7 @@ import { AuthInterceptor } from './auth/interceptors/AuthInterceptor';
     MultiselectComponent,
     UserThumbnailComponent,
     UserInfoModalComponent,
-    ChatComponent,
+
     VideoControlsComponent
   ],
   imports: [

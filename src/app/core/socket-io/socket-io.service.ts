@@ -24,13 +24,17 @@ export class SocketIoService {
   private incomingMessage = new Subject<IRtcMessage>();
   incomingMessage$ = this.incomingMessage.asObservable();
 
-  videoGrid;
-  myVideo;
   peer;
   socket;
   peerConnection = new RTCPeerConnection();
   remoteTracks: RTCRtpSender[] = [];
-  isAlreadyCalling = false;
+
+  videoGrid;
+  myVideo;
+  myVideoStream;
+  text;
+  send;
+  messages;
 
   constructor(private authService: AuthService) {}
 
@@ -38,7 +42,10 @@ export class SocketIoService {
     const token = this.authService.getToken();
     if (!token) { return ; }
 
-    this.socket = io(environment.apiUrl);
+    this.socket = io(environment.apiUrl, {
+      auth: { token },
+      query: { data: JSON.stringify(this.authService.getUser()) },
+    });
     this.peer = new Peer(undefined, {
       host: 'localhost',
       port: 5000,
@@ -46,26 +53,45 @@ export class SocketIoService {
     });
 
     this.peer.on('open', (id) => {
-      this.socket.emit('join-room', 'ROOM_ID', id, 'user');
+      this.socket.emit('join-room', 'ROOM_ID', id, this.authService.user.firstName);
     });
 
-    this.socket.on('createMessage', (message, userName) => console.log(message));
+    this.socket.on('update-user-list', ({ users }) => {
+      this.activeUsers.next(users);
+    });
+
+    this.socket.on('createMessage', (message, userName) => {
+      this.messages.innerHTML =
+        this.messages.innerHTML +
+        `<div class="message">
+        <b><i class="fa fa-user-circle"></i> <span> ${
+          userName === this.authService.user.firstName ? 'me' : userName
+        }</span> </b>
+        <span>${message}</span>
+    </div>`;
+    });
+
+    this.initSelectors();
     this.getMedia().then();
   }
 
-  async getMedia(): Promise<void> {
+  initSelectors(): void {
     this.videoGrid = document.getElementById('video-grid') as HTMLVideoElement;
     this.myVideo = document.createElement('video') as HTMLVideoElement;
     this.myVideo.muted = true;
-    let myVideoStream;
+    this.text = document.querySelector('#chat_message');
+    this.send = document.getElementById('send');
+    this.messages = document.querySelector('.messages');
+  }
 
+  async getMedia(): Promise<void> {
     navigator.mediaDevices
     .getUserMedia({
       audio: true,
       video: true,
     })
     .then((stream) => {
-      myVideoStream = stream;
+      this.myVideoStream = stream;
       this.addVideoStream(this.myVideo, stream);
 
       this.peer.on('call', (call) => {
@@ -98,6 +124,15 @@ export class SocketIoService {
     });
   }
 
+  videoEvent(event: boolean): void {
+    this.myVideoStream.getVideoTracks()[0].enabled = event;
+  }
+
+  microphoneEvent(event: boolean): void {
+    this.myVideoStream.getAudioTracks()[0].enabled = event;
+    console.log(this.myVideoStream.getAudioTracks()[0].enabled);
+  }
+
   async callUser(socketId): Promise<void> {
     const offer = await this.peerConnection.createOffer();
     await this.peerConnection.setLocalDescription(new RTCSessionDescription(offer));
@@ -108,8 +143,8 @@ export class SocketIoService {
     });
   }
 
-  emitMessage(options: WSMessageInterface): void {
-    this.socket.emit(options.event, options.data);
+  emitMessage(message: string): void {
+    this.socket.emit('message', message);
   }
 
   destroy(): void {
