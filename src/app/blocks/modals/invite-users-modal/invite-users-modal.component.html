@@ -1,0 +1,15 @@
+<div class="invite-users-container">
+  <h4>Invite Users</h4>
+
+  <div [formGroup]="inviteForm" class="invite-form">
+    <mat-form-field appearance="outline" class="rtc-input">
+      <mat-label>RoomId</mat-label>
+      <label>
+        <input matInput placeholder="Enter your room ID" type="text" formControlName="roomId" required>
+      </label>
+    </mat-form-field>
+  </div>
+  <div id="inviteButton" class="options__button" (click)="copyLink()">
+    Copy
+  </div>
+</div>
