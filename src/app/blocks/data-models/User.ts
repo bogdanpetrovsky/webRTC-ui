@@ -51,6 +51,13 @@ export class User {
     if (user.gender) { this.gender = user.gender; }
   }
 
+  getPrettyInterests(): string {
+    let result = '';
+    this.interests.forEach((interest) => { result += interest.name; });
+
+    return result;
+  }
+
   toJson(): IUser {
     return {
       id: this.id,

@@ -1,5 +1,5 @@
 <header class="header">
-  <div><div class="header__back" (click)="navigate()">
+  <div><div class="header__back" (click)="navigate()" *ngIf="authService.isSignedIn()">
     <i class="fa fa-angle-left" *ngIf="layoutService.showChatEnabled"></i>
     <i class="fa fa-users" *ngIf="!layoutService.showChatEnabled && !layoutService.showActiveUsersEnabled"></i>
     <i class="fa fa-angle-right" *ngIf="layoutService.showActiveUsersEnabled"></i>

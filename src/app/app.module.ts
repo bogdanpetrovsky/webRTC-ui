@@ -28,6 +28,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { VideoControlsComponent } from './blocks/video-controls/video-controls.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './auth/interceptors/AuthInterceptor';
+import { InviteUsersModalComponent } from './blocks/modals/invite-users-modal/invite-users-modal.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { AuthInterceptor } from './auth/interceptors/AuthInterceptor';
     UserThumbnailComponent,
     UserInfoModalComponent,
 
-    VideoControlsComponent
+    VideoControlsComponent,
+     InviteUsersModalComponent
   ],
   imports: [
     BrowserModule,
@@ -66,7 +68,8 @@ import { AuthInterceptor } from './auth/interceptors/AuthInterceptor';
     HttpClientModule
   ],
   entryComponents: [
-    UserInfoModalComponent
+    UserInfoModalComponent,
+    InviteUsersModalComponent
   ],
   providers: [
     {

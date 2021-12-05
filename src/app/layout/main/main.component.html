@@ -14,24 +14,24 @@
         </div>
         <div class="options">
           <div class="options__left">
-            <div id="stopVideo" class="options__button"
-                 [ngClass]="{'background__red': myVideoOff }"
-                 (click)="stopVideoEvent()"
-            >
-              <i class="fa fa-video-camera"></i>
-            </div>
             <div id="muteButton" class="options__button"
                  [ngClass]="{'background__red': myMicrophoneOff }"
                  (click)="muteMicrophoneEvent()"
             >
               <i class="fa fa-microphone"></i>
             </div>
+            <div id="stopVideo" class="options__button"
+                 [ngClass]="{'background__red': myVideoOff }"
+                 (click)="stopVideoEvent()"
+            >
+              <i class="fa fa-video-camera"></i>
+            </div>
             <div id="showChat" class="options__button" (click)="enableShowChat()">
               <i class="fa fa-comment"></i>
             </div>
           </div>
           <div class="options__right">
-            <div id="inviteButton" class="options__button">
+            <div id="inviteButton" class="options__button" (click)="openInviteModal()">
               <i class="fa fa-user-plus"></i>
             </div>
           </div>

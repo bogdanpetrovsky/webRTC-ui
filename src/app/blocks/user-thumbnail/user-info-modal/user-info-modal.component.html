@@ -2,6 +2,7 @@
   <h4 class="user-name" *ngIf="user.firstName || user.lastName">{{user.firstName}} {{user.lastName}}</h4>
   <h4 class="user-name" *ngIf="!(user.firstName || user.lastName)">Unknown User</h4>
 
-  <p *ngIf="user.about || user.interests">About: {{user.about}}. Interests: {{user.interests}}</p>
-  <p *ngIf="!user.about && !user.interests">This user is a complete mystery!</p>
+  <p *ngIf="user.about">About: {{user.about}}</p>
+  <p *ngIf="interests">Interests: {{interests}}</p>
+  <p *ngIf="!user.about && interests">This user is a complete mystery!</p>
 </div>

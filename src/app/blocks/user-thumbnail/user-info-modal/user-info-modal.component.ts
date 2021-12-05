@@ -8,11 +8,18 @@ import { User } from '../../data-models/User';
   styleUrls: ['./user-info-modal.component.scss']
 })
 export class UserInfoModalComponent implements OnInit {
-
+  interests: string;
   constructor(@Inject(MAT_DIALOG_DATA) public user: User,
               public dialogRef: MatDialogRef<UserInfoModalComponent>) { }
 
   ngOnInit(): void {
+    this.interests = this.getPrettyInterests();
   }
 
+  getPrettyInterests(): string {
+    let result = '';
+    this.user.interests.forEach((interest) => { result += interest.name; });
+
+    return result;
+  }
 }

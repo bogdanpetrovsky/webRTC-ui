@@ -4,7 +4,11 @@ import { ISocketUser, ISocketUserParsed } from '../../blocks/data-models/User';
 import { CallsService } from '../../blocks/services/calls.service';
 import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
 import { AuthService } from '../../auth/services/auth.service';
-import {LayoutService} from '../layout.service';
+import { LayoutService } from '../layout.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { v4 as uuidv4 } from 'uuid';
+import {MatDialog} from '@angular/material/dialog';
+import {InviteUsersModalComponent} from '../../blocks/modals/invite-users-modal/invite-users-modal.component';
 
 @Component({
   selector: 'app-main',
@@ -22,6 +26,7 @@ myMicrophoneOff: boolean;
 messageForm = new FormGroup({
   message: new FormControl(''),
 });
+roomId: string;
 
   get messageField(): AbstractControl {
     return this.messageForm.get('message');
@@ -30,11 +35,20 @@ messageForm = new FormGroup({
   constructor(private socketIoService: SocketIoService,
               public layoutService: LayoutService,
               public callsService: CallsService,
-              public authService: AuthService) {
+              public authService: AuthService,
+              private router: Router,
+              private route: ActivatedRoute,
+              private dialog: MatDialog
+              ) {
   }
 
   ngOnInit(): void {
-    this.socketIoService.initialize();
+    this.roomId = this.route.snapshot.paramMap.get('roomId');
+    if (!this.roomId) {
+      const newRoomId = uuidv4();
+      this.router.navigate(['room', newRoomId]).then();
+    }
+    this.socketIoService.initialize(this.roomId);
     this.socketIoService.users$.subscribe((users: ISocketUser[]) => {
       this.sockets = [];
       users.forEach((user: ISocketUser) => {
@@ -77,5 +91,15 @@ messageForm = new FormGroup({
 
   enableShowChat(): void {
     this.layoutService.showChatEnabled = true;
+  }
+
+  openInviteModal(): void {
+    this.dialog
+    .open(InviteUsersModalComponent, {
+      width: '500px',
+      maxHeight: '90vh',
+      data: this.roomId
+    })
+    .afterClosed().subscribe(() => {});
   }
 }

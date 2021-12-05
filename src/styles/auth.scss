@@ -3,7 +3,6 @@
 .auth-container {
   position: fixed;
   z-index: 5;
-  top: $header-height;
   left: 0;
   height: calc(100% - #{$header-height});
   width: 100%;

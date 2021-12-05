@@ -182,6 +182,13 @@ video {
     }
   }
 
+  .videos__group {
+    max-height: calc(100% - 80px);
+    overflow: auto;
+
+    display: block;
+  }
+
   .main__right {
     display: none;
   }

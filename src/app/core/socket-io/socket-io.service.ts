@@ -38,7 +38,7 @@ export class SocketIoService {
 
   constructor(private authService: AuthService) {}
 
-  initialize(): void {
+  initialize(roomId: string): void {
     const token = this.authService.getToken();
     if (!token) { return ; }
 
@@ -53,7 +53,7 @@ export class SocketIoService {
     });
 
     this.peer.on('open', (id) => {
-      this.socket.emit('join-room', 'ROOM_ID', id, this.authService.user.firstName);
+      this.socket.emit('join-room', roomId, id, this.authService.user.firstName);
     });
 
     this.socket.on('update-user-list', ({ users }) => {

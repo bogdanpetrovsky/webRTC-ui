@@ -7,10 +7,11 @@ import { ProfileComponent } from './auth/components/profile/profile.component';
 import { AuthGuard } from './auth/guards/Auth.guard';
 
 const routes: Routes = [
-  { path: '', component: MainComponent },
+  { path: '', component: MainComponent, canActivate: [ AuthGuard ] },
+  { path: 'room/:roomId', component: MainComponent },
   { path: 'sign-in', component: SignInComponent },
   { path: 'sign-up', component: SignUpComponent },
-  { path: 'profile', component: ProfileComponent, canActivate: [  ] },
+  { path: 'profile', component: ProfileComponent, canActivate: [ AuthGuard ] },
 ];
 
 @NgModule({
